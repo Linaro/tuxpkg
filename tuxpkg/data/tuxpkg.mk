@@ -1,5 +1,7 @@
 version = $(shell sed -e '/^__version__/ !d; s/"\s*$$//; s/.*"//' $(PROJECT)/__init__.py)
 
+CLEAN += dist
+
 rpm: dist/$(PROJECT)-$(version)-0$(PROJECT).noarch.rpm
 
 RPMBUILD = rpmbuild
@@ -33,3 +35,16 @@ dist/$(PROJECT)_$(version)-1.dsc: debian dist/$(PROJECT)_$(version).orig.tar.gz 
 	cd dist && tar xaf $(PROJECT)_$(version).orig.tar.gz
 	cp -r debian/ dist/$(PROJECT)-$(version)
 	cd dist/$(PROJECT)-$(version)/ && dpkg-buildpackage -S -d -us -uc
+
+CLEAN += run
+run:
+	echo "#!/bin/sh" > $@
+	echo "set -eu" >> $@
+	echo 'realfile="$$(readlink -f "$$0")"' >> $@
+	echo 'export PYTHONPATH="$$(dirname "$$realfile")"' >> $@
+	echo 'exec python3 -m $(PROJECT) "$$@"' >> $@
+	chmod +x run
+
+
+clean::
+	$(RM) -r $(CLEAN)

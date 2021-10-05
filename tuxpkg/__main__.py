@@ -2,6 +2,7 @@ import argparse
 import sys
 import tuxpkg
 import tuxpkg.get_makefile
+import tuxpkg.get_debian_rules
 
 
 def main():
@@ -28,6 +29,12 @@ def main():
         help="Prints the path to the tuxpkg shared makefile. It can be included in a Makefile using a construct like like `$(include $(shell tuxpkg get-makefile))`.",
     )
     get_makefile.set_defaults(func=tuxpkg.get_makefile.run)
+
+    get_debian_rules = subparsers.add_parser(
+        "get-debian-rules",
+        help="Prints the path to the tuxpkg shared debian/rules. It can be included in a your debian/rules using a construct like like `$(include $(shell tuxpkg get-makefile))`. You just need to set PYBUILD_NAME first.",
+    )
+    get_debian_rules.set_defaults(func=tuxpkg.get_debian_rules.run)
 
     options = parser.parse_args(sys.argv[1:])
     options.func()

@@ -9,8 +9,10 @@ style:
 	black --check .
 
 flake8:
-	flake8 --ignore=E501 .
-
+	flake8 --exclude=dist/ --ignore=E501 .
 
 typecheck:
-	mypy .
+	mypy --exclude=dist/ .
+
+export PROJECT := tuxpkg
+include tuxpkg/data/tuxpkg.mk
