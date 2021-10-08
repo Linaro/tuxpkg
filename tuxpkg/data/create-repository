@@ -17,8 +17,12 @@ if [ -z "${TUXPKG_RELEASE_KEYID:-}" ]; then
     if [ -n "${GNUPGID:-}" ]; then
         TUXPKG_RELEASE_KEYID="${GNUPGID}"
     else
-        TUXPKG_RELEASE_KEYID=
+        TUXPKG_RELEASE_KEYID=$(gpg --list-secret-keys --with-colons | awk -F: '{if ($1 == "fpr") { print($10); exit } }')
     fi
+fi
+if [ -z "${TUXPKG_RELEASE_KEYID}" ]; then
+    echo "E: GPG key to sign the repositories with not found. Set \${TUXPKG_RELEASE_KEYID}, \${GNUPGID}, or ensure that you have a private key in your gpg keyring."
+    exit 1
 fi
 
 export GPG_TTY=
