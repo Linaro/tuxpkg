@@ -7,6 +7,7 @@ URL:       https://gitlab.com/terceiro/tuxpkg
 Source0:   %{pypi_source}
 
 
+BuildRequires: git
 BuildRequires: make
 BuildRequires: python3-devel
 BuildRequires: python3-flit
