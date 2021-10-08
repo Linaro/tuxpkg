@@ -53,5 +53,5 @@ pypi:
     FLIT_USERNAME: __token__
   script:
     - apt-get update
-    - apt-get install --no-install-recommends git flit
+    - apt-get install -qy --no-install-recommends git flit
     - flit publish
