@@ -24,6 +24,7 @@ pypi:
   needs: [dist]
 
 pages:
+  stage: publish
   needs:
     - repository
   only:
