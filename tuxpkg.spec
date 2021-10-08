@@ -1,5 +1,5 @@
 Name:      tuxpkg
-Version:   0.1.1
+Version:   0.1.2
 Release:   0%{?dist}
 Summary:   release automation tool for Python projects
 License:   Expat
