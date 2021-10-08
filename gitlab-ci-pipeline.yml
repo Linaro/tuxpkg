@@ -27,7 +27,7 @@ rpm:
     paths:
       - dist/*.rpm
 
-.deb:
+deb:
   stage: build
   needs:
     - dist
