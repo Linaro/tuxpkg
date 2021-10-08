@@ -39,7 +39,7 @@ variables:
 
 .repository:
   image: debian
-  stage: publish
+  stage: deploy
   script:
     - apt-get update
     - apt-get install --no-install-recommends -qy dpkg-dev apt-utils createrepo-c rpm gpg gpg-agent python3
@@ -50,7 +50,7 @@ variables:
 
 .pypi:
   image: debian
-  stage: publish
+  stage: deploy
   variables:
     FLIT_USERNAME: __token__
   script:
