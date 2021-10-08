@@ -3,9 +3,9 @@ from pathlib import Path
 
 
 class Action:
-    def __init__(self, target: str):
-        self.target = target
-        self.target_path = Path(__file__).parent / "data" / self.target
+    def __init__(self, source: str):
+        self.source = source
+        self.source_path = Path(__file__).parent / "data" / self.source
 
     def __call__(self) -> None:
         pass
@@ -13,7 +13,7 @@ class Action:
 
 class PointToFile(Action):
     def __call__(self) -> None:
-        print(self.target_path)
+        print(self.source_path)
 
 
 get_makefile = PointToFile("tuxpkg.mk")
@@ -22,7 +22,7 @@ get_debian_rules = PointToFile("debianrules.mk")
 
 class RunScript(Action):
     def __call__(self) -> None:
-        os.execv(str(self.target_path), [self.target])
+        os.execv(str(self.source_path), [self.source])
 
 
 create_repository = RunScript("create-repository")
