@@ -29,6 +29,7 @@ if [ ! -f ${relnotes} ]; then
     printf "Container images:\n\n" >> ${relnotes}
     (git log --no-merges --reverse --oneline v${current_version}.. || true) >> ${relnotes}
 fi
+trap "rm -f ${relnotes}" INT TERM EXIT
 
 ${EDITOR} ${relnotes}
 echo "Release notes: "
@@ -49,4 +50,3 @@ $git commit -a -m "Release ${version}"
 $git push
 $git tag --sign --file=${relnotes} v${version}
 $git push --tags
-rm -f ${relnotes}
