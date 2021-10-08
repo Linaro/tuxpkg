@@ -1,23 +1,8 @@
 variables:
   TUXPKG: tuxpkg
 
-dist:
-  stage: build
-  image: debian
-  script:
-    - apt-get update
-    - apt-get install -qy auto-apt-proxy
-    - apt-get install -qy --no-install-recommends make git flit
-    - make dist
-  artifacts:
-    paths:
-      - dist/*.tar.gz
-      - dist/*.whl
-
 rpm:
   stage: build
-  needs:
-    - dist
   image: fedora
   script:
     - dnf install -y dnf-plugins-core rpm-build
@@ -29,8 +14,6 @@ rpm:
 
 deb:
   stage: build
-  needs:
-    - dist
   image: debian
   script:
     - apt-get update
@@ -60,7 +43,6 @@ repository:
 pypi:
   only:
     - tags
-  needs: [dist]
   image: debian
   stage: deploy
   variables:
