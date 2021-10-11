@@ -9,7 +9,7 @@ style:
 	black --check --diff .
 
 flake8:
-	flake8 --exclude=dist/ --ignore=E501 .
+	flake8 --exclude=dist/ --ignore=E501,W503 .
 
 typecheck:
 	mypy --exclude=dist/ .
