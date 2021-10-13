@@ -55,6 +55,8 @@ rpm:
     FLIT_NO_NETWORK: 1
   script:
     - make rpm
+    - rpm --query --info dist/*.rpm
+    - rpm --query --list dist/*.rpm
   artifacts:
     paths:
       - dist/*.rpm
@@ -65,6 +67,8 @@ deb:
     FLIT_NO_NETWORK: 1
   script:
     - make deb
+    - dpkg --info dist/*.deb
+    - dpkg --contents dist/*.deb
   artifacts:
     paths:
       - dist/*.deb
