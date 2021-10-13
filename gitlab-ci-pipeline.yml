@@ -56,6 +56,7 @@ rpm:
   script:
     - make rpm
     - rpm --query --info dist/*.rpm
+    - rpm --query --requires dist/*.rpm
     - rpm --query --list dist/*.rpm
   artifacts:
     paths:
