@@ -61,6 +61,15 @@ rpm:
     paths:
       - dist/*.rpm
 
+rpm-sanity-test:
+  stage: test
+  image: fedora
+  needs:
+    - rpm
+  script:
+    - dnf install -y ./dist/*.rpm
+    - ${TUXPKG_PROJECT} --help
+
 deb:
   stage: build
   variables:
@@ -72,6 +81,16 @@ deb:
   artifacts:
     paths:
       - dist/*.deb
+
+deb-sanity-check:
+  stage: test
+  image: debian
+  needs:
+    - deb
+  script:
+    - apt-get update -q
+    - apt-get install -qy ./dist/*.deb
+    - ${TUXPKG_PROJECT} --help
 
 repository:
   only:
