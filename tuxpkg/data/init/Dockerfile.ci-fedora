@@ -2,7 +2,7 @@ FROM fedora
 ARG EXTRA_PACKAGES
 
 COPY *.spec /tuxpkg/
-RUN dnf install -y dnf-plugins-core rpm-build ${EXTRA_PACKAGES} \
+RUN dnf install -y dnf-plugins-core rpm-build python3 python3-pip ${EXTRA_PACKAGES} \
     && dnf builddep -y /tuxpkg/*.spec
 
 RUN if [ -f /tuxpkg/tuxpkg.spec ]; then exit; fi; \
