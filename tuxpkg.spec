@@ -33,7 +33,6 @@ and RPM packages.
 
 %build
 export FLIT_NO_NETWORK=1
-make run
 #make man
 #make bash_completion
 

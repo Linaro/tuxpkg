@@ -52,15 +52,6 @@ dist/$(PROJECT)_$(version)-1.dsc: debian dist/$(PROJECT)_$(version).orig.tar.gz 
 	cp -r debian/ dist/$(PROJECT)-$(version)
 	cd dist/$(PROJECT)-$(version)/ && dpkg-buildpackage -S -d -us -uc
 
-CLEAN += run
-run:
-	echo "#!/bin/sh" > $@
-	echo "set -eu" >> $@
-	echo 'realfile="$$(readlink -f "$$0")"' >> $@
-	echo 'export PYTHONPATH="$$(dirname "$$realfile")"' >> $@
-	echo 'exec python3 -m $(PROJECT) "$$@"' >> $@
-	chmod +x run
-
 release:
 	python3 -m tuxpkg release
 
