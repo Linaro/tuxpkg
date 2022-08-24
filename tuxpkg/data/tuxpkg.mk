@@ -1,9 +1,10 @@
 .PHONY: test
 
+MODULE ?= $(shell echo $(PROJECT) | sed -e 's/-/_/g')
 TUXPKG_MIN_COVERAGE ?= 100
 
 test:
-	python3 -m pytest --cov=$(PROJECT) --cov-report=term-missing --cov-report=xml:coverage.xml --cov-fail-under=$(TUXPKG_MIN_COVERAGE)
+	python3 -m pytest --cov=$(MODULE) --cov-report=term-missing --cov-report=xml:coverage.xml --cov-fail-under=$(TUXPKG_MIN_COVERAGE)
 
 style:
 	black --check --diff .
@@ -14,16 +15,16 @@ flake8:
 typecheck:
 	mypy --exclude=dist/ .
 
-version ?= $(shell sed -e '/^__version__/ !d; s/"\s*$$//; s/.*"//' $(PROJECT)/__init__.py)
+version ?= $(shell sed -e '/^__version__/ !d; s/"\s*$$//; s/.*"//' $(MODULE)/__init__.py)
 
 CLEAN += dist
 
-rpm: dist/$(PROJECT)-$(version)-0$(PROJECT).noarch.rpm
+rpm: dist/$(PROJECT)-$(version)-0$(MODULE).noarch.rpm
 
 RPMBUILD = rpmbuild
-dist/$(PROJECT)-$(version)-0$(PROJECT).noarch.rpm: dist/$(PROJECT)-$(version).tar.gz dist/$(PROJECT).spec
+dist/$(PROJECT)-$(version)-0$(MODULE).noarch.rpm: dist/$(PROJECT)-$(version).tar.gz dist/$(PROJECT).spec
 	cd dist && \
-	$(RPMBUILD) -ta --define "dist $(PROJECT)" --define "_rpmdir $$(pwd)" $(PROJECT)-$(version).tar.gz
+	$(RPMBUILD) -ta --define "dist $(MODULE)" --define "_rpmdir $$(pwd)" $(PROJECT)-$(version).tar.gz
 	mv $(patsubst dist/%, dist/noarch/%, $@) $@
 	rmdir dist/noarch
 
