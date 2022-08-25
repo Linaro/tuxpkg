@@ -39,7 +39,7 @@ python3 -m pytest test/
 
 %install
 mkdir -p %{buildroot}/usr/share/%{name}/
-cp -r run %{name} %{buildroot}/usr/share/%{name}/
+cp -r run %{dist} %{buildroot}/usr/share/%{name}/
 mkdir -p %{buildroot}/usr/bin
 ln -sf ../share/%{name}/run %{buildroot}/usr/bin/%{name}
 #mkdir -p %{buildroot}%{_mandir}/man1
