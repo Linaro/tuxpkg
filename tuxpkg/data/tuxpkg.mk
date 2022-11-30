@@ -2,9 +2,12 @@
 
 MODULE ?= $(shell echo $(PROJECT) | sed -e 's/-/_/g')
 TUXPKG_MIN_COVERAGE ?= 100
+ifneq ($(NUM_WORKERS),)
+WORKERS="--workers=$(NUM_WORKERS)"
+endif
 
 test:
-	python3 -m pytest --cov=$(MODULE) --cov-report=term-missing --cov-report=xml:coverage.xml --cov-fail-under=$(TUXPKG_MIN_COVERAGE)
+	python3 -m pytest $(WORKERS) --cov=$(MODULE) --cov-report=term-missing --cov-report=xml:coverage.xml --cov-fail-under=$(TUXPKG_MIN_COVERAGE)
 
 style:
 	black --check --diff .
