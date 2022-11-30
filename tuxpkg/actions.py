@@ -39,6 +39,7 @@ class CopyDirectory(FileAction):
         super().__init__(source)
         self.variables = {
             "project": Path(".").absolute().name,
+            "module": Path(".").absolute().name.replace("-", "_"),
             "timestamp": datetime.utcnow(),
         }
 
