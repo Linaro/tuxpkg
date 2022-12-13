@@ -10,7 +10,7 @@ theme:
   name: material
   logo: tuxpkg.svg
   favicon: tuxpkg.svg
-
+  font: false
 
 markdown_extensions:
 - admonition
