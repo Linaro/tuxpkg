@@ -55,7 +55,7 @@ The following variables must be set as protected in the CI/CD configuration:
         for your project only. DO NOT upload your own private key! :-)
     
     ```shell
-    gpg --export-private-keys --armor KEYID
+    gpg --export-secret-keys --armor KEYID
     ```
 
 - `TUXPKG_RELEASE_KEYID`: 
