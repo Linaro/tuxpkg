@@ -2,7 +2,7 @@
 
 set -eu
 
-current_version=$(python3 -c "import ${PROJECT}; print(${PROJECT}.__version__)")
+current_version=$(python3 -c "import ${MODULE}; print(${MODULE}.__version__)")
 version=${VERSION:-}
 if [ -z "${version}" ]; then
     version=$(echo ${current_version} | awk -F . '{OFS = "." ; $3 = "0"; $2 += 1; print($0)}')
@@ -11,7 +11,7 @@ relnotes=.git/relnotes-${version}.txt
 git=${git:-git}
 
 if [ -n "$(git tag --list v${version})" ]; then
-    echo "Version ${version} already released. Bump the version in ${PROJECT}/__init__.py to make a new release"
+    echo "Version ${version} already released. Bump the version in ${MODULE}/__init__.py to make a new release"
     exit 1
 fi
 
@@ -38,7 +38,7 @@ sed -e 's/^/| /' ${relnotes}
 read -p "Press ENTER to release version ${version} with the release notes above, or ctrl-c to abort" input
 
 # update version number
-sed -i -e "s/^__version__.*/__version__ = \"${version}\"/" ${PROJECT}/__init__.py
+sed -i -e "s/^__version__.*/__version__ = \"${version}\"/" ${MODULE}/__init__.py
 if [ -f "${PROJECT}.spec" ]; then
     sed -i -e "s/^Version:.*/Version:   ${version}/" ${PROJECT}.spec
 fi

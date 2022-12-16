@@ -1,6 +1,6 @@
 .PHONY: test
 
-MODULE ?= $(shell echo $(PROJECT) | sed -e 's/-/_/g')
+export MODULE ?= $(shell echo $(PROJECT) | sed -e 's/-/_/g')
 TUXPKG_MIN_COVERAGE ?= 100
 ifneq ($(NUM_WORKERS),)
 WORKERS="--workers=$(NUM_WORKERS)"
