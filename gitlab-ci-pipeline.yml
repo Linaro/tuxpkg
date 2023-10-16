@@ -53,6 +53,12 @@ ci-image-fedora:
          - Dockerfile.ci-fedora
          - '*.spec'
 
+check-repository-key:
+  stage: build
+  image: $CI_REGISTRY_IMAGE:ci-debian
+  script:
+    - ${TUXPKG} check-repository-key
+
 rpm:
   stage: build
   image: $CI_REGISTRY_IMAGE:ci-fedora
@@ -114,6 +120,7 @@ repository:
   needs:
     - deb
     - rpm
+    - check-repository-key
   stage: deploy
   script:
     - ${TUXPKG} create-repository
