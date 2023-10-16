@@ -2,7 +2,16 @@
 
 set -eu
 
-expiration=$(gpg -K --with-colons ${TUXPKG_RELEASE_KEY:-} | awk -F : '{print($7); exit}')
+if [ -n "${TUXPKG_RELEASE_KEY:-}" ]; then
+    gpg --batch --import ${TUXPKG_RELEASE_KEY}
+fi
+
+if [ -z "${TUXPKG_RELEASE_KEYID:-}" ]; then
+  echo "W: \${TUXPKG_RELEASE_KEYID} not defined, skipping"
+  exit
+fi
+
+expiration=$(gpg -K --with-colons ${TUXPKG_RELEASE_KEYID:-} | awk -F : '{print($7); exit}')
 now=$(date +%s)
 days=$(( (expiration - now) / (24*60*60)))
 if [ $days -lt 90 ]; then
