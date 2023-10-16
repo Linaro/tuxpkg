@@ -11,6 +11,8 @@ if [ -z "${TUXPKG_RELEASE_KEYID:-}" ]; then
   exit
 fi
 
+gpg --list-secret-keys ${TUXPKG_RELEASE_KEYID}
+
 expiration=$(gpg -K --with-colons ${TUXPKG_RELEASE_KEYID:-} | awk -F : '{print($7); exit}')
 now=$(date +%s)
 days=$(( (expiration - now) / (24*60*60)))
