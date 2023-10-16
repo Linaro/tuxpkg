@@ -57,6 +57,7 @@ check-repository-key:
   stage: build
   image: $CI_REGISTRY_IMAGE:ci-debian
   script:
+    - "if ! dpkg --compare-versions $(tuxpkg --version | awk '{print($2)}') ge 0.13.0; then exit; fi"
     - ${TUXPKG} check-repository-key
 
 rpm:
