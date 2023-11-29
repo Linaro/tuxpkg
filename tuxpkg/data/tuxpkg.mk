@@ -40,6 +40,8 @@ dist: dist/$(PROJECT)-$(version).tar.gz
 
 dist/$(PROJECT)-$(version).tar.gz:
 	flit build
+	find dist/ -type f
+	if [ ! -f $@ ]; then git archive --prefix=$(PROJECT)-$(version)/ --output=$@ HEAD; fi
 
 deb: debsrc dist/$(PROJECT)_$(version)-1_all.deb
 
