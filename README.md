@@ -81,6 +81,13 @@ The following variables must be set as protected in the CI/CD configuration:
     - variable options: "Protected"
     - set value to  `__token__`
 
+The following variables don't need to be protected. They can be set in the
+project settings as well, but it's probably better to set them explicitly in
+`.gitlab-ci.yml`.
+
+- `SKIP_BUILD_DEB`, `SKIP_BUILD_RPM`. Set these to `1` to skip building RPM and
+  Debian packages, respectively.
+
 
 3. Setup .gitlab-ci.yml file
 
