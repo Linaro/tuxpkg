@@ -144,7 +144,6 @@ pypi:
   stage: deploy
   needs:
     - test
-    - repository
   variables:
     FLIT_USERNAME: __token__
   script:
