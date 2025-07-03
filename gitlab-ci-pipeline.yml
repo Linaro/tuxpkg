@@ -54,7 +54,7 @@ ci-image-fedora:
          - '*.spec'
 
 check-repository-key:
-  stage: build
+  stage: deploy
   image: $CI_REGISTRY_IMAGE:ci-debian
   script:
     - "if ! dpkg --compare-versions $(tuxpkg --version | awk '{print($2)}') ge 0.13.0; then exit; fi"
@@ -63,7 +63,7 @@ check-repository-key:
 rpm:
   rules:
     - if: $SKIP_BUILD_RPM != "1"
-  stage: build
+  stage: deploy
   image: $CI_REGISTRY_IMAGE:ci-fedora
   variables:
     FLIT_NO_NETWORK: 1
@@ -80,7 +80,7 @@ rpm:
 rpm-sanity-check:
   rules:
     - if: $SKIP_BUILD_RPM != "1"
-  stage: test
+  stage: deploy
   image: fedora
   needs:
     - rpm
@@ -94,7 +94,7 @@ deb:
   rules:
     - if: $SKIP_BUILD_DEB != "1"
   image: $CI_REGISTRY_IMAGE:ci-debian
-  stage: build
+  stage: deploy
   variables:
     FLIT_NO_NETWORK: 1
   script:
@@ -110,7 +110,7 @@ deb:
 deb-sanity-check:
   rules:
     - if: $SKIP_BUILD_DEB != "1"
-  stage: test
+  stage: deploy
   image: debian
   needs:
     - deb
