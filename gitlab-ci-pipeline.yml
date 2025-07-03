@@ -64,6 +64,8 @@ rpm:
   rules:
     - if: $SKIP_BUILD_RPM != "1"
   stage: deploy
+  needs:
+    - test
   image: $CI_REGISTRY_IMAGE:ci-fedora
   variables:
     FLIT_NO_NETWORK: 1
@@ -95,6 +97,8 @@ deb:
     - if: $SKIP_BUILD_DEB != "1"
   image: $CI_REGISTRY_IMAGE:ci-debian
   stage: deploy
+  needs:
+    - test
   variables:
     FLIT_NO_NETWORK: 1
   script:
