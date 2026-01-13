@@ -73,6 +73,11 @@ ci-image-archlinux:
          - Dockerfile.ci-archlinux
          - tuxpkg/data/init/Dockerfile.ci-archlinux
          - '*.PKGBUILD'
+     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+       changes:
+         - Dockerfile.ci-archlinux
+         - tuxpkg/data/init/Dockerfile.ci-archlinux
+         - '*.PKGBUILD'
 
 check-repository-key:
   stage: deploy
