@@ -2,4 +2,6 @@
 
 set -exu
 
-flit init
+if [ ! -f pyproject.toml ] || [ "${TUXPKG_FORCE:-}" = "1" ]; then
+    flit init
+fi
