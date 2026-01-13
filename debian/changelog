@@ -1,3 +1,9 @@
+tuxpkg (0.18.0-1) UNRELEASED; urgency=medium
+
+  * Release 0.18.0. See: https://gitlab.com/Linaro/tuxpkg/-/tags/v0.18.0
+
+ -- Anders Roxell <anders.roxell@linaro.org>  Tue, 13 Jan 2026 16:05:20 +0100
+
 tuxpkg (0.17.0-1) UNRELEASED; urgency=medium
 
   * Release 0.17.0. See: https://gitlab.com/Linaro/tuxpkg/-/tags/v0.17.0
