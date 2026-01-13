@@ -1,5 +1,5 @@
 pkgname=tuxpkg
-pkgver=0.18.0
+pkgver=0.19.0
 pkgrel=1
 pkgdesc='Release automation tool for Python projects'
 url='https://gitlab.com/Linaro/tuxpkg'
