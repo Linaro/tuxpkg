@@ -180,11 +180,12 @@ pkg-sanity-check:
 
 repository:
   rules:
-    - if: $SKIP_BUILD_RPM != "1" && $SKIP_BUILD_DEB != "1" && $CI_COMMIT_TAG != null && $TUXPKG_RELEASE_KEY != null && $TUXPKG_RELEASE_KEYID != null
+    - if: $SKIP_BUILD_RPM != "1" && $SKIP_BUILD_DEB != "1" && $SKIP_BUILD_PKG != "1" && $CI_COMMIT_TAG != null && $TUXPKG_RELEASE_KEY != null && $TUXPKG_RELEASE_KEYID != null
   image: $CI_REGISTRY_IMAGE:ci-debian
   needs:
     - deb
     - rpm
+    - pkg
     - check-repository-key
   stage: deploy
   script:
