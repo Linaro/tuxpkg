@@ -23,6 +23,7 @@ There are several options for using tuxpkg:
 - [From PyPI](install-pypi.md)
 - [Debian packages](install-deb.md)
 - [RPM packages](install-rpm.md)
+- [ArchLinux packages](install-arch.md)
 - [Run uninstalled](run-uninstalled.md)
 
 
