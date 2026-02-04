@@ -52,7 +52,7 @@ if command -v repo-add >/dev/null 2>&1; then
     for pkg in *.pkg.tar.*; do
         $gpg --detach-sign --output ${pkg}.sig ${pkg}
     done
-    repo-add -s -k ${TUXPKG_RELEASE_KEYID} ${project}.db.tar.gz *.pkg.tar.*
+    repo-add -s -k ${TUXPKG_RELEASE_KEYID} ${project}.db.tar.gz *.pkg.tar.zst
     arch_install_instructions="<p>
 1) Create /etc/pacman.d/${project}.conf with the following contents:
 </p>
