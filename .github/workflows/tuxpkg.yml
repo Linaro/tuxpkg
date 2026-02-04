@@ -241,7 +241,7 @@ jobs:
       - name: Install tuxpkg
         run: |
           apt-get update -q
-          apt-get install -qy python3-pip createrepo-c rpm gpg gpg-agent apt-utils pacman-package-manager
+          apt-get install -qy python3-pip createrepo-c rpm gpg gpg-agent apt-utils pacman-package-manager libarchive-tools
           pip3 install --break-system-packages tuxpkg
       - name: Import GPG key
         if: ${{ env.TUXPKG_RELEASE_KEY != '' }}
