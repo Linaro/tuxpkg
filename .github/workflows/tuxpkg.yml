@@ -193,6 +193,10 @@ jobs:
           locale-gen
           useradd -m build
           echo 'build ALL=(ALL) NOPASSWD: ALL' >/etc/sudoers.d/build
+      - name: Prepare Arch build
+        run: |
+          pacman -Syu --noconfirm
+          if grep -q '^pkg-prepare:' Makefile; then make pkg-prepare; fi
       - name: Build Arch package
         run: |
           chown -R build:build .
