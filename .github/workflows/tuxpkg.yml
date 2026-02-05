@@ -195,8 +195,9 @@ jobs:
           echo 'build ALL=(ALL) NOPASSWD: ALL' >/etc/sudoers.d/build
       - name: Prepare Arch build
         run: |
-          pacman -Syu --noconfirm
+          pacman -Syyu --noconfirm make
           if grep -q '^pkg-prepare:' Makefile; then make pkg-prepare; fi
+          pacman -Syu --noconfirm
       - name: Build Arch package
         run: |
           chown -R build:build .
